@@ -10,11 +10,29 @@ To optimize performance, we have integrated TimescaleDB, a PostgreSQL extension,
 
 ## Performance Test Results
 
-Test Environment: [http://clean-db-opt-test.rhythm-dev.com:5000/](http://clean-db-opt-test.rhythm-dev.com:5000/) 
-Resources: 1GB memory, 1 CPU 
-Module: Arrivals on Green 
-Location: SR347 | Cobblestone North 
-Date Range: 02/20/2022 - 02/28/2022
+Test Environment: [http://clean-db-opt-test.rhythm-dev.com:5000/](http://clean-db-opt-test.rhythm-dev.com:5000/)
+<br/> Resources: 1GB memory, 1 CPU
+<br/> Module: Arrivals on Green
+<br/>Location: SR347 | Cobblestone North
+
+### Date Range: 02/21/2022 - 02/21/2022
+
+### 15-min interval
+
+-   Initial execution time: 1.14 seconds
+-   Execution time after implementing TimescaleDB: 484.16 milliseconds
+
+### 30-min interval
+
+-   Initial execution time: 1.49 seconds
+-   Execution time after implementing TimescaleDB: 637.74 milliseconds
+
+### 1-hour interval
+
+-   Initial execution time: 1.11 seconds
+-   Execution time after implementing TimescaleDB: 514.92 milliseconds
+
+### Date Range: 02/20/2022 - 02/28/2022
 
 ### 1-hour interval
 
