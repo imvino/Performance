@@ -63,9 +63,14 @@ To install the TimescaleDB extension on an existing Windows setup, follow these 
 
 1.  Copy the "cpyFile\postgresql.conf" file to `C:\ProgramData\Rhythm Engineering\codeGREEN\pgdb`.
     
+**Note:** _You can also enable the TimescaleDB extension in PostgreSQL by modifying your existing postgresql.conf file, from `;shared_preload_libraries = ''` to `shared_preload_libraries = 'timescaledb'` instead of copying postgresql.conf_
+
+
 2.  Copy all files in the "cpyFile\lib" folder to `C:\ProgramFiles\Rhythm Engineering\codeGREEN\bin\pgsql\lib`.
 
+
 3.  Copy all files in the "cpyFile\extension" folder to `C:\Program Files\Rhythm Engineering\codeGREEN\bin\pgsql\share\extension`.
+
     
 4.  Run the following PostgreSQL query to generate TimescaleDB functions in the database:
     `CREATE EXTENSION IF NOT EXISTS timescaledb;` 
