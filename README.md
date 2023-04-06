@@ -8,54 +8,61 @@ In the previous code implementation, the system did not utilize time series for 
 To optimize performance, we have integrated TimescaleDB, a PostgreSQL extension, into the system. This extension handles time series data more efficiently, eliminating the need to manually calculate time intervals. Performance tests demonstrated a significant reduction in execution time.
 
 
-## Performance Test Results
 
-Test Environment: [http://clean-db-opt-test.rhythm-dev.com:5000/](http://clean-db-opt-test.rhythm-dev.com:5000/)
+## Performance Test Results On Low Spec
+
+Test Environment: [http://clean-db-opt-test.rhythm-dev.com:5000/](http://clean-db-opt-test.rhythm-dev.com:5000/) (AWS)
 <br/> Resources: 1GB memory, 1 CPU
 <br/> Module: Arrivals on Green
 <br/>Location: SR347 | Cobblestone North
 
+
 ### Date Range: 02/21/2022 - 02/21/2022
+| Interval                 | Initial Execution Time       | After Implementing TimescaleDB |
+|--------------------------|------------------------------|-----------------------------------------------|
+| 15-min                   | 1.14 seconds                 | 484.16 milliseconds                          |
+| 30-min                   | 1.49 seconds                 | 637.74 milliseconds                          |
+| 1-hour                   | 1.11 seconds                 | 514.92 milliseconds                          |
 
-### 15-min interval
-
--   Initial execution time: 1.14 seconds
--   Execution time after implementing TimescaleDB: 484.16 milliseconds
-
-### 30-min interval
-
--   Initial execution time: 1.49 seconds
--   Execution time after implementing TimescaleDB: 637.74 milliseconds
-
-### 1-hour interval
-
--   Initial execution time: 1.11 seconds
--   Execution time after implementing TimescaleDB: 514.92 milliseconds
 
 ### Date Range: 02/20/2022 - 02/28/2022
 
-### 1-hour interval
+| Interval                 | Initial Execution Time       | After Implementing TimescaleDB |
+|--------------------------|------------------------------|--------------------------------|
+| 1-hour                   | 11.08 seconds                | 3.48 seconds                   |
+| 6-hour                   | 22.96 seconds                | 10.79 seconds                  |
+| 12-hour                  | 35.93 seconds                | 19.4 seconds                   |
+| 24-hour                  | 1 minutes 30 seconds         | 20 seconds                     |
 
--   Initial execution time: 11.08 seconds
--   Execution time after implementing TimescaleDB: 3.48 seconds
 
-### 6-hour interval
-
--   Initial execution time: 22.96 seconds
--   Execution time after implementing TimescaleDB: 10.79 seconds
-
-### 12-hour interval
-
--   Initial execution time: 35.93 seconds
--   Execution time after implementing TimescaleDB: 19.4 seconds
-
-### 24-hour interval
-
--   Initial execution time: 1minutes 30 seconds
--   Execution time after implementing TimescaleDB: 20 seconds
 -   Note: TimescaleDB is more suited for shorter time frames (less than 24 hours). The 24-hour interval test did not yield results.
 
-The performance test results show significant improvements in execution time across various time intervals after implementing the TimescaleDB extension. These enhancements are especially noticeable for shorter time frames, where the extension is most effective.
+## Performance Test Results On Mid Spec
+
+Test Environment: http://localhost:5000/ (Docker)
+<br/> Resources: 3GB memory, 4 CPU
+<br/> Module: Arrivals on Green
+<br/> Location: SR347 | Cobblestone North
+
+### Date Range: 02/21/2022 - 02/21/2022
+| Interval                 | Initial Execution Time | After Implementing TimescaleDB |
+|--------------------------|-----------------------|-----------------------------------------------|
+| 15-min                   | 610.58 milliseconds        | 400 milliseconds                              |
+| 30-min                   | 659.48 milliseconds        | 416 milliseconds                              |
+| 1-hour                   | 755.86 milliseconds              | 642 milliseconds                              |
+
+
+### Date Range: 02/20/2022 - 02/28/2022
+
+| Interval                 | Initial Execution Time | After Implementing TimescaleDB |
+|--------------------------|-----------------------|-----------------------------------------------|
+| 1-hour                   | 3.28 seconds              | 1.02 seconds                                  |
+| 6-hour                   | 4.17 seconds         | 2.95 seconds                                 |
+| 12-hour                  | 6.45 seconds         | 5.62 seconds                                  |
+| 24-hour                  | 12 seconds  | 9.81 seconds                                    |
+
+<br/>
+The performance test results show that implementing the TimescaleDB extension resulted in significant improvements in execution time across various time intervals on a low-spec system. Although the difference is minimal on a mid-spec system, it is still advisable to use TimescaleDB for future databases that might become more complex
 
 ## Installing TimescaleDB on Windows
 
