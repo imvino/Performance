@@ -37,7 +37,7 @@ Test Environment: [http://clean-db-opt-test.rhythm-dev.com:5000/](http://clean-d
 
 
 <br/>
-The performance test results show that implementing the TimescaleDB extension resulted in significant improvements in execution time across various time intervals on a low-spec system. Although the difference is minimal on a mid-spec system, it is still advisable to use TimescaleDB for future databases that might become more complex
+The performance test results show that implementing the TimescaleDB extension resulted in significant improvements in execution time across various time intervals on a low-spec system. It is advisable to use TimescaleDB for future databases that might become more complex
 
 ## Installing TimescaleDB on Windows
 
