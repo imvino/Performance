@@ -20,46 +20,21 @@ Test Environment: [http://clean-db-opt-test.rhythm-dev.com:5000/](http://clean-d
 ### Date Range: 02/21/2022 - 02/21/2022
 | Interval                 | Initial Execution Time       | After Implementing TimescaleDB |
 |--------------------------|------------------------------|-----------------------------------------------|
-| 15-min                   | 1.14 seconds                 | 484.16 milliseconds                          |
-| 30-min                   | 1.49 seconds                 | 637.74 milliseconds                          |
-| 1-hour                   | 1.11 seconds                 | 514.92 milliseconds                          |
+| 15-min                   | 1.14 seconds                 | 833.15 milliseconds                          |
+| 30-min                   | 1.49 seconds                 | 710.81 milliseconds                          |
+| 1-hour                   | 1.11 seconds                 | 729.7 milliseconds                          |
 
 
 ### Date Range: 02/20/2022 - 02/28/2022
 
 | Interval                 | Initial Execution Time       | After Implementing TimescaleDB |
 |--------------------------|------------------------------|--------------------------------|
-| 1-hour                   | 11.08 seconds                | 3.48 seconds                   |
-| 6-hour                   | 22.96 seconds                | 10.79 seconds                  |
-| 12-hour                  | 35.93 seconds                | 19.4 seconds                   |
-| 24-hour                  | 1 minutes 30 seconds         | 20 seconds                     |
+| 1-hour                   | 11.08 seconds                | 2.32 seconds                   |
+| 6-hour                   | 22.96 seconds                | 4.2 seconds                  |
+| 12-hour                  | 35.93 seconds                | 7.2 seconds                   |
+| 24-hour                  | 1 minutes 30 seconds         | 13.38 seconds                     |
 
 
--   Note: TimescaleDB is more suited for shorter time frames (less than 24 hours). The 24-hour interval test did not yield results.
-
-## Performance Test Results On Mid Spec
-
-Test Environment: http://localhost:5000/ (Docker)
-<br/> Resources: 3GB memory, 4 CPU
-<br/> Module: Arrivals on Green
-<br/> Location: SR347 | Cobblestone North
-
-### Date Range: 02/21/2022 - 02/21/2022
-| Interval                 | Initial Execution Time | After Implementing TimescaleDB |
-|--------------------------|-----------------------|-----------------------------------------------|
-| 15-min                   | 610.58 milliseconds        | 400 milliseconds                              |
-| 30-min                   | 659.48 milliseconds        | 416 milliseconds                              |
-| 1-hour                   | 755.86 milliseconds              | 642 milliseconds                              |
-
-
-### Date Range: 02/20/2022 - 02/28/2022
-
-| Interval                 | Initial Execution Time | After Implementing TimescaleDB |
-|--------------------------|-----------------------|-----------------------------------------------|
-| 1-hour                   | 3.28 seconds              | 1.02 seconds                                  |
-| 6-hour                   | 4.17 seconds         | 2.95 seconds                                 |
-| 12-hour                  | 6.45 seconds         | 5.62 seconds                                  |
-| 24-hour                  | 12 seconds  | 9.81 seconds                                    |
 
 <br/>
 The performance test results show that implementing the TimescaleDB extension resulted in significant improvements in execution time across various time intervals on a low-spec system. Although the difference is minimal on a mid-spec system, it is still advisable to use TimescaleDB for future databases that might become more complex
@@ -81,6 +56,19 @@ To install the TimescaleDB extension on an existing Windows setup, follow these 
     
 4.  Run the following PostgreSQL query to generate TimescaleDB functions in the database:
     `CREATE EXTENSION IF NOT EXISTS timescaledb;` 
+
+## Installing TimescaleDB on Docker
+
+To install TimescaleDB on a new Docker container, Open your terminal or command prompt and run the following command to create a new Docker container with TimescaleDB:
+
+    `docker run -d --name timingplans-db -p 5432:5432 -e TZ=GMT -e POSTGRES_USER=timingplans -e POSTGRES_PASSWORD=timingplans timescale/timescaledb:latest-pg12`
+
+## Installing TimescaleDB on an Existing PostgreSQL Docker Container
+
+If you already have a PostgreSQL Docker container and want to install TimescaleDB on it, follow this documentataion:
+
+https://www.knyl.me/blog/install-timescaledb-on-an-existing-postgresql-container/
+
 
 ## Updating Node Server Code
 
